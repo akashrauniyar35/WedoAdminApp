@@ -1,0 +1,50 @@
+{
+  "name": "WedoAdminApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^6.3.3",
+    "@react-navigation/drawer": "^6.4.4",
+    "@react-navigation/native": "^6.0.12",
+    "@react-navigation/stack": "^6.2.3",
+    "moment": "^2.29.4",
+    "react": "17.0.2",
+    "react-native": "0.68.2",
+    "react-native-calendar-picker": "^7.1.2",
+    "react-native-calendar-strip": "^2.2.6",
+    "react-native-calendars": "^1.1288.2",
+    "react-native-chart-kit": "^6.12.0",
+    "react-native-gesture-handler": "^2.6.0",
+    "react-native-reanimated": "^2.10.0",
+    "react-native-safe-area-context": "^4.3.3",
+    "react-native-screens": "^3.17.0",
+    "react-native-svg": "^13.0.0",
+    "react-native-vector-icons": "^9.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/runtime": "^7.18.9",
+    "@react-native-community/eslint-config": "^3.1.0",
+    "@types/jest": "^28.1.8",
+    "@types/react": "^18.0.17",
+    "@types/react-native": "^0.69.5",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^29.0.1",
+    "eslint": "^8.23.0",
+    "jest": "^29.0.1",
+    "metro-react-native-babel-preset": "^0.72.1",
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.8.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
