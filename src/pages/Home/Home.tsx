@@ -7,8 +7,11 @@ import LineChart from '../../components/LineChart';
 
 import Header from '../../components/Header';
 
-const { width, height } = Dimensions.get('window')
+import { useSelector, useDispatch } from 'react-redux'
 
+
+
+const { width, height } = Dimensions.get('window')
 const techniciansList = [
     {
         id: '00',
@@ -49,13 +52,17 @@ const Banner = () => {
 const Home = ({ navigation }) => {
     const [selectTech, setSelectTech] = useState(false)
 
+    const count = useSelector((state) => state)
+    const dispatch = useDispatch()
+    console.log("HOME REDUX", count)
+
     const selectTechnician = () => {
         setSelectTech(!selectTech);
     }
     return (
         <>
             <SafeAreaView />
-            <View style={{ paddingHorizontal: colors.spacing * 2, }}>
+            <View style={{ paddingHorizontal: colors.spacing * 2, backgroundColor: "white", }}>
 
                 <Header nav={navigation} title="Dashboard" />
                 <View style={{ marginBottom: colors.spacing * 1 }} />

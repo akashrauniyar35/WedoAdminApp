@@ -11,7 +11,7 @@ const Appointments = ({ navigation }) => {
         <>
             <View>
                 <SafeAreaView />
-                <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
+                <View style={{ paddingHorizontal: Colors.spacing * 2,backgroundColor: "white", }}>
                     <Header nav={navigation} title="Appointments" />
                     <View style={{ marginBottom: Colors.spacing * 1 }} />
 

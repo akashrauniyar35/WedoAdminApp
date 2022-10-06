@@ -4,7 +4,9 @@ import Header from '../../components/Header'
 import SearchBox from '../../components/SearchBox'
 import Colors from '../../assets/Colors'
 import BookingsCard from './BookingsCard'
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import DataFilter from '../../components/DataFilter'
+import TablePageButtons from '../../components/TablePageButtons'
 const pages = [
   {
     id: '00',
@@ -75,7 +77,7 @@ const data = [
     service: 'G'
   },
   {
-    id: "03",
+    id: "05",
     name: "James Uday",
     phone: "041579187",
     location: "Paramatta NSW 2150",
@@ -85,7 +87,37 @@ const data = [
     service: 'G'
   },
   {
-    id: "03",
+    id: "04",
+    name: "James Uday",
+    phone: "041579187",
+    location: "Paramatta NSW 2150",
+    invoiced: true,
+    date: "09/09/2022",
+    paid: true,
+    service: 'G'
+  },
+  {
+    id: "04",
+    name: "James Uday",
+    phone: "041579187",
+    location: "Paramatta NSW 2150",
+    invoiced: true,
+    date: "09/09/2022",
+    paid: true,
+    service: 'G'
+  },
+  {
+    id: "04",
+    name: "James Uday",
+    phone: "041579187",
+    location: "Paramatta NSW 2150",
+    invoiced: true,
+    date: "09/09/2022",
+    paid: true,
+    service: 'G'
+  },
+  {
+    id: "04",
     name: "James Uday",
     phone: "041579187",
     location: "Paramatta NSW 2150",
@@ -101,39 +133,55 @@ const Bookings = ({ navigation }) => {
   return (
     <>
       <SafeAreaView />
-      <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
-        <Header nav={navigation} title="Bookings" />
-        <View style={{ marginBottom: Colors.spacing * 1 }} />
-      </View>
-      <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
+      <View style={{ backgroundColor: 'white' }}>
+        <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
+          <Header nav={navigation} title="Bookings" />
+          <View style={{ marginBottom: Colors.spacing * 1 }} />
+        </View>
+        <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
 
-        <SearchBox />
-        <View style={{ marginBottom: Colors.spacing * 1 }} />
-      </View>
+          <SearchBox />
 
-      <View style={{}}>
-        <FlatList data={data}
-          scrollEnabled={false}
-          contentContainerStyle={{ paddingHorizontal: Colors.spacing * 2, }}
-          keyExtractor={item => item.id}
-          renderItem={({ item }) => (<BookingsCard item={item} />)}
-        />
 
-      </View>
-      <View style={{ paddingHorizontal: Colors.spacing * 2, marginTop: Colors.spacing * 1 }}>
-        <Text style={{ fontSize: 10, color: Colors.black, marginBottom: 5, }} >PAGE 1 OF 6</Text>
-        <FlatList horizontal data={pages} keyExtractor={item => item.id}
 
-          contentContainerStyle={{ width: '100%' }}
+          <View style={{ marginBottom: Colors.spacing * 1 }} />
 
-          renderItem={({ item }) => (
-            <TouchableWithoutFeedback >
-              <View style={{ marginRight: 10, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.darkBlue, borderRadius: 100, height: 35, width: 35 }}>
-                <Text style={{ color: 'white', fontWeight: '700' }}>{item.page}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+
+            <TouchableWithoutFeedback>
+              <View style={[styles.addButton, { backgroundColor: Colors.lightRed, }]}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Refresh</Text>
+                <Icon name="ios-refresh-circle" size={28} color='white' style={{ marginLeft: 10 }} />
               </View>
             </TouchableWithoutFeedback>
-          )} />
+
+            <TouchableWithoutFeedback onPress={() => { }}>
+              <View style={[styles.addButton, { backgroundColor: Colors.green, }]}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Add Booking</Text>
+                <Icon name="ios-add-circle" size={28} color='white' style={{ marginLeft: 10 }} />
+              </View>
+            </TouchableWithoutFeedback>
+
+          </View>
+          <View style={{ marginBottom: Colors.spacing * 1 }} />
+          <DataFilter />
+          <View style={{ marginBottom: Colors.spacing * 1 }} />
+        </View>
+
+        <View style={{}}>
+          <FlatList data={data}
+            scrollEnabled={true}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: Colors.spacing * 2,  }}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (<BookingsCard item={item} />)}
+          />
+        </View>
+
       </View>
+
+
+      {/* <TablePageButtons pages={pages} /> */}
 
 
     </>
@@ -142,4 +190,15 @@ const Bookings = ({ navigation }) => {
 
 export default Bookings
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  addButton: {
+    width: '45%',
+    padding: 4,
+    paddingVertical: 2,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  }
+})

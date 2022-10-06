@@ -10,5 +10,10 @@ export default {
     darkBlue: "#1D3557",
     unPaid: '#C10000',
     paid: '#48a14d',
+    grayText: "#858585",
+    grayBG: '#f5f5f5',
+    littleGray: '#333333',
+    transparentGloss: 'rgba(0,0,0,0.5)',
+    grayOne: '#454545',
 
 }

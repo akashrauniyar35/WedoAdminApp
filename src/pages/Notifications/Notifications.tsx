@@ -20,7 +20,7 @@ const Notifications = ({ navigation }) => {
   return (
     <View>
       <SafeAreaView />
-      <View style={{ paddingHorizontal: Colors.spacing * 2, }}>
+      <View style={{ paddingHorizontal: Colors.spacing * 2, backgroundColor: "white", }}>
         <Header nav={navigation} title="Notifications" />
         <View style={{ marginBottom: Colors.spacing * 1 }} />
         <AccordiaSearch />

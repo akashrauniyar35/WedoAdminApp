@@ -1,11 +1,14 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react'
-import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Dimensions, Image, Pressable, ActivityIndicator, SafeAreaView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useDispatch, useSelector } from 'react-redux';
 import Colors from '../assets/Colors';
 import Divider from '../components/Divider';
+import { logoutPending, logoutSuccess } from '../redux/authenticationSlice';
 
 
 
@@ -15,7 +18,30 @@ const drawerLists = [
 
 
 const CustomDrawer = (props) => {
+    const logoutRequest = useSelector((state: any) => state.logoutRequest)
+    const dispatch = useDispatch()
     console.log(props)
+
+
+
+    const logoutHandler = async () => {
+        const token = 'token xxx'
+        console.log(token)
+        dispatch(logoutPending(token))
+        dispatch(logoutSuccess(token))
+        try {
+            const value = await AsyncStorage.removeItem('@access_Token')
+            if (value !== null) {
+                console.log("GET ASYNC STORAGE ACCESS", value);
+            }
+        } catch (e) {
+            // error reading value
+        }
+    }
+
+
+
+
 
 
     const DrawerLabel = ({ label, icon, navigateTo }) => {
@@ -23,8 +49,8 @@ const CustomDrawer = (props) => {
             <TouchableWithoutFeedback onPress={() => props.navigation.navigate(navigateTo)}>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: Colors.spacing * 3, marginBottom: Colors.spacing * 2, }}>
-                    <IconM name={icon} size={28} color={"#1e1e1e"} />
-                    <Text style={{ marginLeft: Colors.spacing * 2, fontSize: 18, color: Colors.black }}>{label}</Text>
+                    <IconM name={icon} size={22} color={"#1e1e1e"} />
+                    <Text style={{ marginLeft: Colors.spacing * 2, fontSize: 13, color: Colors.black }}>{label}</Text>
                 </View>
             </TouchableWithoutFeedback >
         )
@@ -33,7 +59,7 @@ const CustomDrawer = (props) => {
         return (
             <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: Colors.spacing * 3.5, marginBottom: Colors.spacing * 2, }}>
                 <IconM name={icon} size={22} color={"#1e1e1e"} />
-                <Text style={{ marginLeft: Colors.spacing * 2, fontSize: 16, color: Colors.black }}>{label}</Text>
+                <Text style={{ marginLeft: Colors.spacing * 2, fontSize: 13, color: Colors.black }}>{label}</Text>
             </View>
         )
     }
@@ -58,12 +84,21 @@ const CustomDrawer = (props) => {
             </View>
         )
     }
+
+
+
     const DrawerFooter = () => {
+
+        console.log("drawer logout", logoutRequest)
         return (
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: Colors.green, padding: Colors.spacing, paddingHorizontal: Colors.spacing * 2, }}>
-                <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', }}>Logout</Text>
-                <Icon name="log-out-outline" size={22} color={'white'} />
-            </View>
+            <Pressable onPress={() => logoutHandler()} >
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: Colors.green, padding: Colors.spacing, paddingHorizontal: Colors.spacing * 2, }}>
+                    <Text style={{ color: 'white', fontSize: 18, fontWeight: '600', }}>Logout</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        {logoutRequest ? <ActivityIndicator size={20} color={'white'} /> : <Icon name="log-out-outline" size={22} color={'white'} />}
+                    </View>
+                </View>
+            </Pressable>
         )
     }
 
@@ -92,7 +127,7 @@ const CustomDrawer = (props) => {
                     <DrawerLabel icon={"account-group-outline"} label="Completed Jobs" navigateTo={"Completed Jobs"} />
 
                     <DrawerLabel icon={"account-group-outline"} label="Job Recalls" navigateTo={"TechnicianList"} />
-             
+
                     {/* <DrawerLabel icon={"account-group-outline"} label="Technician List" navigateTo={"TechnicianList"} /> */}
 
 

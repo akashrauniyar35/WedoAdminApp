@@ -1,6 +1,9 @@
 import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import IconM from 'react-native-vector-icons/MaterialIcons';
+import Colors from '../../assets/Colors';
+import ClientCard from './ClientCard';
+import RequestedServiceCard from './RequestedServiceCard';
 
 
 const { width, height } = Dimensions.get('screen')
@@ -79,12 +82,6 @@ const AMCModal = ({ isOpen, onPress, onClose }) => {
     const [openAMC, setOpenAMC] = useState(isOpen);
 
 
-    const toggleModal = () => {
-        setOpenAMC(!openAMC)
-    }
-
-
-
     return (
         <>
             <View style={{}}>
@@ -100,12 +97,13 @@ const AMCModal = ({ isOpen, onPress, onClose }) => {
                         <View style={{
                             flex: 1,
                             backgroundColor: textColor, width: width,
-                            padding: spacing * 2,
+                            paddingTop: spacing * 2,
+
                         }}>
 
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: spacing * 2.5 }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: spacing * 2.5, paddingHorizontal: spacing * 2 }}>
 
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: colorOne, }}>Edit Task</Text>
+                                <Text style={{ fontSize: 18, fontWeight: '600', color: colorOne, }}>Open Quote Modal</Text>
                                 <Pressable
                                     style={{ alignSelf: 'flex-end' }}
                                     onPress={() => onPress()}
@@ -117,39 +115,62 @@ const AMCModal = ({ isOpen, onPress, onClose }) => {
 
 
 
-                            {/* 
-                            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'> */}
 
-                            <View style={{ marginVertical: spacing * 2 }}>
-                                <TextInput
-                                    style={styles.taskTitle}
-                                    // onChangeText={onChangeNumber}
-                                    // value={number}
-                                    placeholderTextColor={grayText}
-                                    placeholder="Fan Fix Burwood"
-                                />
-                                <View style={styles.taskTitleBadge}><Text style={{ fontSize: 12, color: grayText, paddingHorizontal: 6, padding: 2, backgroundColor: 'white' }}>Task Title *</Text></View>
-                            </View>
+                            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' >
 
 
 
-
-
-
-
-
-
-
-
-
-                            <TouchableWithoutFeedback onPress={() => { }}>
-                                <View style={{ backgroundColor: colorOne, marginBottom: spacing * 2, borderRadius: 5, padding: 14, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>UPDATE</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing * 2 }}>
+                                    <Text style={{ color: grayText, fontWeight: '600', fontSize: 13, }}>Service</Text>
+                                    <View style={{ backgroundColor: grayText, width: 4, height: 4, borderRadius: 100, marginTop: 2, marginHorizontal: spacing }} />
+                                    <Text style={{ color: grayText, fontWeight: '600', fontSize: 13, }}>End of Lease</Text>
                                 </View>
-                            </TouchableWithoutFeedback>
 
 
-                            {/* </ScrollView> */}
+                                <View style={{ marginVertical: spacing, paddingHorizontal: spacing * 2 }}>
+
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <Text style={{ fontSize: 16, fontWeight: '600', color: colorOne, }}>End of Lease Clean</Text>
+
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                            <Text style={{ color: grayText, fontSize: 13, }}>Quote Ref: </Text>
+                                            <Text style={{ color: grayText, fontSize: 13, }}>WD21</Text>
+                                        </View>
+
+
+                                    </View>
+
+                                    <View style={{ alignItems: 'center', borderRadius: 4, marginTop: Colors.spacing * .5, backgroundColor: Colors.paid, width: '40%' }}><Text style={{ fontWeight: '300', fontSize: 13, color: 'white', paddingVertical: 2 }}>Booking Confirmed</Text></View>
+
+                                </View>
+
+
+
+                                <View style={{ marginBottom: spacing, paddingHorizontal: spacing * 2 }}>
+                                    <ClientCard />
+                                </View>
+
+                                <View style={{ marginBottom: spacing, paddingHorizontal: spacing * 2 }}>
+                                    <RequestedServiceCard />
+                                </View>
+
+
+
+
+
+
+
+                                {/* 
+                                <TouchableWithoutFeedback onPress={() => { }}>
+                                    <View style={{ backgroundColor: colorOne, marginBottom: spacing * 2, borderRadius: 5, padding: 14, alignItems: 'center', justifyContent: 'center' }}>
+                                        <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>UPDATE</Text>
+                                    </View>
+                                </TouchableWithoutFeedback> */}
+
+
+                            </ScrollView>
+
+
 
                         </View>
                     </View >

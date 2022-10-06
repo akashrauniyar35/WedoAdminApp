@@ -4,6 +4,7 @@ import colors from '../../assets/Colors'
 import Icon from 'react-native-vector-icons/Ionicons';
 import OpenBookingModal from './OpenBookingModal';
 
+
 const colorOne = '#01151A';
 const colorTwo = '';
 const colorThree = '';
@@ -22,8 +23,6 @@ const { width, height } = Dimensions.get('screen')
 const BookingsCard = ({ item }) => {
     const [openBooking, setOpenBooking] = useState(false);
 
-
-
     const onPress = () => {
         setOpenBooking(!openBooking);
     }
@@ -32,15 +31,17 @@ const BookingsCard = ({ item }) => {
         <>
             <TouchableWithoutFeedback onPress={() => onPress()}>
                 <View style={{
+                    flex: 1,
                     backgroundColor: 'white',
                     padding: 10,
+                    elevation: 3,
                     marginBottom: 15,
                     borderRadius: 10,
                     shadowRadius: 2,
                     shadowOpacity: .2,
+                    shadowOffset: { width: 0, height: 1 },
                     flexDirection: 'row',
                     alignItems: 'center',
-                    shadowOffset: { width: 0, height: 1 }
                 }}>
                     <View style={{
                         backgroundColor: colors.red, alignItems: 'center',

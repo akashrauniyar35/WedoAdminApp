@@ -1,7 +1,10 @@
-import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimation, Image, TouchableWithoutFeedback, Platform } from 'react-native'
+import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimation, Image, TouchableWithoutFeedback, Platform, ActivityIndicator } from 'react-native'
 import React, { useState, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../assets/Colors';
+import { useSelector, useDispatch } from 'react-redux'
+import { searchQuoteFail, searchQuotePending, searchQuoteSuccess } from '../redux/quoteTableSlice';
+import { searchQuote } from '../config/QuoteApi';
 
 const { width, height } = Dimensions.get('screen')
 
@@ -26,10 +29,40 @@ const data = [
     },
 ]
 
-const SearchBox = () => {
+const SearchBox = ({ type, }: string, onChange: any) => {
     const [onPress, setOnPress] = useState(false);
     const animationController = useRef(new Animated.Value(0)).current
-    const [selected, setSelected] = useState();
+    const [searchValue, setSearchValue] = useState();
+
+    const dispatch = useDispatch()
+
+    const searchHandler = async (value) => {
+        setSearchValue(value)
+
+        if (type === "quote") {
+            dispatch(searchQuotePending(value))
+
+            try {
+                const searchResults: any = await searchQuote(value);
+                console.log("Respone isAuth", searchResults)
+                if (searchResults.status === "error") {
+                    // setErroremail(true)
+                    // setErrorpassword(isAuth.message)
+                    return dispatch(searchQuoteFail(searchResults.message));
+                }
+                console.log("Search results", searchResults.data.paginatedResults)
+                dispatch(searchQuoteSuccess(searchResults.data.paginatedResults));
+
+            } catch (e: any) {
+                dispatch(searchQuoteFail(e.message));
+            }
+
+        }
+
+
+
+    }
+
 
 
     const dropDownAnimation = {
@@ -64,13 +97,24 @@ const SearchBox = () => {
 
             <View style={styles.container}>
                 <View style={[styles.taskTitle,]}>
-                    <TextInput
-                        onChangeText={(e) => { arrowTransform(), setSelected(e) }}
-                        style={{ fontSize: 16, }}
-                        value={selected ? selected : ''}
-                        placeholderTextColor={Colors.black}
-                        placeholder={selected ? selected : '....'}
-                    />
+                    {type === "quote" ?
+                        <TextInput
+                            autoCapitalize="none"
+                            onChangeText={(value) => { searchHandler(value) }}
+                            style={{ fontSize: 13, marginTop: 2 }}
+                            value={searchValue ? searchValue : ''}
+                            placeholderTextColor={Colors.black}
+                            placeholder={searchValue ? searchValue : '....'}
+                        /> :
+                        <TextInput
+                            autoCapitalize="none"
+                            onChangeText={(e) => { arrowTransform(), setSearchValue(e) }}
+                            style={{ fontSize: 13, marginTop: 2 }}
+                            value={searchValue ? searchValue : ''}
+                            placeholderTextColor={Colors.black}
+                            placeholder={searchValue ? searchValue : '....'}
+                        />}
+
                     <View style={[styles.taskTitleBadge, { width: 70, flexDirection: 'row', alignItems: 'center' }]}>
                         <Text style={{ fontSize: 12, color: Colors.black, paddingLeft: 6, padding: 2, backgroundColor: 'white' }}>Search</Text>
                         <View style={{ backgroundColor: 'white', paddingHorizontal: 4, paddingRight: 6, }}>
@@ -80,7 +124,7 @@ const SearchBox = () => {
                     <View style={[styles.drowpDown, onPress && { overflow: 'hidden', marginTop: onPress && Colors.spacing * 2 }, { overflow: 'hidden', }]}>
                         {onPress && data.map((item) => {
                             return (
-                                <TouchableWithoutFeedback key={item.id} onPress={() => { setSelected(item.title), arrowTransform(), setOnPress(false) }}>
+                                <TouchableWithoutFeedback key={item.id} onPress={() => { setSearchValue(item.title), arrowTransform(), setOnPress(false) }}>
                                     <View style={{ borderColor: Colors.black, marginBottom: Colors.spacing }}>
                                         <Text style={{ fontSize: 12, color: Colors.black, }}>{item.title}</Text>
                                     </View>
@@ -103,9 +147,9 @@ const styles = StyleSheet.create({
     },
     taskTitle: {
         placeHolderTextColor: {},
-        padding: 14,
+        paddingHorizontal: 14,
         borderRadius: 4,
-        paddingVertical: Platform.OS == 'android' ? 3 : 10,
+        paddingVertical: Platform.OS == 'android' ? 3 : 7,
         borderWidth: 1.5,
         borderColor: '#7E7E7E',
         position: 'relative',
@@ -120,7 +164,7 @@ const styles = StyleSheet.create({
         flexGrow: .1
     },
 
-    selected: {
+    searchValue: {
         alignItems: 'center',
         padding: 14,
         paddingHorizontal: 10,
@@ -130,7 +174,7 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
 
-    unselected: {
+    unsearchValue: {
         alignItems: 'center',
         padding: 14,
         paddingHorizontal: 10,

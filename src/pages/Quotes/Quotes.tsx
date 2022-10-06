@@ -6,6 +6,7 @@ import SearchBox from '../../components/SearchBox'
 import Icon from 'react-native-vector-icons/Ionicons';
 import QuoteTables from './QuoteTables'
 import AddQuoteModal from './AddQuoteModal'
+import Colors from '../../assets/Colors'
 
 
 
@@ -13,48 +14,28 @@ import AddQuoteModal from './AddQuoteModal'
 
 
 const Quotes = ({ navigation }) => {
-    const [addQuote, setAddQuote] = useState(false);
+    // const [addQuote, setAddQuote] = useState(false);
 
-    const toggleAddQuote = () => {
-        setAddQuote(!addQuote);
-    }
-
+    // const toggleAddQuote = () => {
+    //     setAddQuote(!addQuote);
+    // }
 
     return (
         <>
             <SafeAreaView />
-            <View style={{ paddingHorizontal: colors.spacing * 2, }}>
+            <View style={{ paddingHorizontal: colors.spacing * 2, backgroundColor: "white", flex: 1 }}>
                 <Header nav={navigation} title="Quotes" />
                 <View style={{ marginBottom: colors.spacing * 1 }} />
-                <SearchBox />
 
-                <View style={{ marginBottom: colors.spacing * 1 }} />
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-
-                    <TouchableWithoutFeedback>
-                        <View style={[styles.addButton, { backgroundColor: colors.lightRed, }]}>
-                            <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Refresh</Text>
-                            <Icon name="ios-refresh-circle" size={28} color='white' style={{ marginLeft: 10 }} />
-                        </View>
-                    </TouchableWithoutFeedback>
-
-                    <TouchableWithoutFeedback onPress={toggleAddQuote}>
-                        <View style={[styles.addButton, { backgroundColor: colors.green, }]}>
-                            <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Add Quote</Text>
-                            <Icon name="ios-add-circle" size={28} color='white' style={{ marginLeft: 10 }} />
-                        </View>
-                    </TouchableWithoutFeedback>
-
+                <View style={{ flex: .62, }}>
+                    <QuoteTables />
                 </View>
 
-                <View style={{ marginBottom: colors.spacing * 1 }} />
-                <QuoteTables />
 
 
 
-
-                {addQuote ? <AddQuoteModal isOpen={addQuote} onPress={toggleAddQuote} onClose={toggleAddQuote} /> : null}
+                {/* {addQuote ? <AddQuoteModal isOpen={addQuote} onPress={toggleAddQuote} onClose={toggleAddQuote} /> : null} */}
             </View >
 
 
@@ -66,13 +47,5 @@ const Quotes = ({ navigation }) => {
 export default Quotes
 
 const styles = StyleSheet.create({
-    addButton: {
-        width: '45%',
-        padding: 4,
-        borderRadius: 5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
 
-    }
 })

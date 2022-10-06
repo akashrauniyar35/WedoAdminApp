@@ -15,7 +15,7 @@ const ShowCard = ({ navigation }) => {
 
                 <TouchableWithoutFeedback onPress={() => navigation.navigate('login')}>
 
-                    <View style={{ backgroundColor: Colors.skyColor, width: '100%%', padding: Colors.spacing * 1, borderRadius: 4, alignItems: 'center', justifyContent: 'center', }}>
+                    <View style={{ backgroundColor: Colors.skyColor, width: '100%', padding: Colors.spacing * 1, borderRadius: 4, alignItems: 'center', justifyContent: 'center', }}>
                         <Text style={{ color: Colors.black, fontWeight: '600', fontSize: 12, }}>Login</Text>
                     </View>
                 </TouchableWithoutFeedback>
@@ -32,7 +32,7 @@ const ShowCard = ({ navigation }) => {
                 <View style={{ paddingHorizontal: Colors.spacing * 1, paddingTop: Colors.spacing * 1, }}>
 
 
-                    <View style={{ borderRadius: 25, backgroundColor: '#fff', width: '100%', height: '60%', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ borderRadius: 25, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
                         <Image source={google} style={{ width: 200, height: 300 }} />
                     </View>
                     <View style={{ paddingTop: Colors.spacing * 6, alignItems: 'center', justifyContent: 'center' }}>
