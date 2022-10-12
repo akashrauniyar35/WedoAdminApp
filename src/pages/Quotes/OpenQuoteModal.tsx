@@ -1,7 +1,7 @@
 import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import IconM from 'react-native-vector-icons/MaterialIcons';
-import Colors from '../../assets/Colors';
+import {Colors} from '../../assets/Colors';
 import ClientCard from './ClientCard';
 import RequestedServiceCard from './RequestedServiceCard';
 

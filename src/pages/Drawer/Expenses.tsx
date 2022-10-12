@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import Header from '../../components/Header'
 import SearchBox from '../../components/SearchBox'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 import StripCalandar from '../../components/StripeCalendar'
 import OpenExpenseModal from './OpenExpenseModal';
 import { FlatList } from 'react-native-gesture-handler';

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Agenda, CalendarList } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Colors from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 import ViewAppointmentModal from '../pages/Drawer/ViewAppointmentModal';
 
 

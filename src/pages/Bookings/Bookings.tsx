@@ -2,7 +2,7 @@ import { Dimensions, FlatList, SafeAreaView, StyleSheet, Text, TouchableWithoutF
 import React from 'react'
 import Header from '../../components/Header'
 import SearchBox from '../../components/SearchBox'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 import BookingsCard from './BookingsCard'
 import Icon from 'react-native-vector-icons/Ionicons';
 import DataFilter from '../../components/DataFilter'

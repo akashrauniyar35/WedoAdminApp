@@ -1,7 +1,7 @@
 import { Button, SafeAreaView, Image, StyleSheet, Text, View, StatusBar, TouchableWithoutFeedback } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../../components/Header'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 
 // import ShowCardImage from '../../assets/authImg.png';
 import google from "../../assets/loginImage.png";

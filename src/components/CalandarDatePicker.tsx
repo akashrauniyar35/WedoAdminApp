@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import CalendarPicker from 'react-native-calendar-picker';
-import Colors from '../assets/Colors';
+import {Colors} from '../assets/Colors';
 
 
 const { width, height } = Dimensions.get('screen')

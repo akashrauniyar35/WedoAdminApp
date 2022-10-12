@@ -1,15 +1,16 @@
-import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView } from 'react-native'
+import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
-import Colors from '../../assets/Colors';
+import {Colors} from '../../assets/Colors';
 import ClientCard from './ClientCard';
 import RequestedServiceCard from './RequestedServiceCard';
 import CustomerDetailsCard from './CustomerDetailsCard';
 import ScheduleCard from './ScheduleCard';
 import JobsDetailsCard from './JobsDetailsCard';
 import TotalsCard from './TotalsCard';
-
+import PaymensCard from './PaymensCard';
+const isAndroid = Platform.OS == 'android' ? true : false
 
 const { width, height } = Dimensions.get('screen')
 
@@ -95,7 +96,9 @@ const EditModal = ({ isOpen, onPress, onClose, }: any) => {
 
     return (
         <>
+
             <View style={{}}>
+
 
 
                 <Modal
@@ -104,12 +107,11 @@ const EditModal = ({ isOpen, onPress, onClose, }: any) => {
                     visible={isOpen}
                 >
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-
+                        <SafeAreaView />
                         <View style={{
                             flex: 1,
                             backgroundColor: textColor,
                             width: width,
-                            paddingTop: spacing * 2,
                             borderTopRightRadius: spacing * 2,
                         }}>
 
@@ -118,40 +120,44 @@ const EditModal = ({ isOpen, onPress, onClose, }: any) => {
                                 borderBottomWidth: 1,
                                 borderColor: Colors.transparentGloss,
                                 justifyContent: 'space-between',
-                                marginVertical: spacing * 2.5,
-                                paddingHorizontal: spacing * 2,
-                                paddingBottom: Colors.spacing * .5
+                                paddingHorizontal: Colors.spacing * 2,
+                                paddingVertical: Colors.spacing,
+                                marginBottom: Colors.spacing * 2
+
                             }}>
 
                                 <Pressable
                                     style={{}}
                                     onPress={() => onPress()}
                                 >
-                                    <Icon color={colorOne} name="chevron-back" size={25} />
+                                    <Icon color={colorOne} name="chevron-back" size={24} />
                                 </Pressable>
-                                <Text style={{ fontSize: 16, fontWeight: '600', color: colorOne, }}>Edit</Text>
+                                <Text style={{ fontSize: 18, fontWeight: isAndroid ? "900" : "600", color: colorOne, }}>Edit</Text>
                                 <Pressable>
-                                    <Text style={{ fontSize: 16, fontWeight: '600', color: colorOne, }}>Save</Text>
+                                    <Text style={{ fontSize: 18, fontWeight: isAndroid ? "900" : "600", color: colorOne, }}>Save</Text>
                                 </Pressable>
                             </View>
 
-                            <ScrollView style={{ paddingHorizontal: spacing * 1, }}>
+                            <ScrollView style={{}}>
 
-                                <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                <View style={{ marginBottom: Colors.spacing * 2, paddingHorizontal: spacing * 2, }}>
                                     <CustomerDetailsCard />
                                 </View>
 
-                                <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                <View style={{ marginBottom: Colors.spacing * 2, paddingHorizontal: spacing * 2, }}>
                                     <ScheduleCard />
                                 </View>
 
-                                <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                <View style={{ marginBottom: Colors.spacing * 2, paddingHorizontal: spacing * 2, }}>
                                     <JobsDetailsCard />
                                 </View>
 
-                                <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                <View style={{ marginBottom: Colors.spacing * 2, paddingHorizontal: spacing * 2, }}>
                                     <TotalsCard />
                                 </View>
+
+
+
 
 
                             </ScrollView>

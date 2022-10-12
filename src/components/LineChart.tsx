@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { LineChart } from 'react-native-chart-kit';
-import Colors from '../assets/Colors';
+import {Colors} from '../assets/Colors';
 
 const { width, height } = Dimensions.get('window')
 

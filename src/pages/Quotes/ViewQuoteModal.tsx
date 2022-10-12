@@ -1,17 +1,17 @@
 import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
-import Colors from '../../assets/Colors';
+import { Colors } from '../../assets/Colors';
 import ClientCard from './ClientCard';
 import RequestedServiceCard from './RequestedServiceCard';
-import EditModal from './EditModal';
+import EditModal from './EditQuoteModal';
 import SearchBox from '../../components/SearchBox';
-import StatusBox from '../../components/StatusDropDown';
+import StatusBox from '../../components/SelectionCard';
 import NotesCard from './NotesCard';
-import AddNotes from './AddNotes';
+import AddNotes from './AddNotesCard';
 import QuoteTimeline from './QuoteTimelineCard';
 import QuoteTimelineCard from './QuoteTimelineCard';
-import NotesAccordian from '../../components/NotesAccordian';
+import NotesAccordian from '../../components/TimelineAccordian';
 import { useSelector, useDispatch } from 'react-redux'
 import { validatePathConfig } from '@react-navigation/native';
 import { fetchQuoteByID } from '../../config/QuoteApi';
@@ -96,6 +96,7 @@ const ViewQuoteModal = ({ isOpen, onPress, onClose }) => {
 
     return (
         <>
+          
             <View style={{}}>
 
                 <Modal
@@ -108,7 +109,6 @@ const ViewQuoteModal = ({ isOpen, onPress, onClose }) => {
                     </View >
                 </Modal >
             </View >
-
 
         </>
     )

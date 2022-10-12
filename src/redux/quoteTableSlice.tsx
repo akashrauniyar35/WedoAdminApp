@@ -1,13 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+
+
+
+
+export interface initialState {
+
+    searchValue: string,
+    sealectedQuoteValue: string,
+    quotePageData: {
+        _id: string,
+        email: string,
+        name: string,
+        phone: string,
+        quoteReference: string,
+        quoteStatus: string,
+        service: string,
+        subtotal: number,
+    },
+    quoteData: [],
+    quoteByIdData: [],
+    listLoading: boolean,
+    selectedQuoteLoading: boolean,
+    selectedQuoteValue: string,
+
+}
+
+const initialState: initialState = {
     searchValue: "",
     selectedQuoteValue: '',
+    quotePageData: [],
     quoteByIdData: [],
     selectedQuoteLoading: false,
     quoteData: [],
     listLoading: false
 };
+
+
+
 
 const getAllQuotesSlice = createSlice({
     name: 'getAllQuotes',
@@ -15,12 +45,15 @@ const getAllQuotesSlice = createSlice({
     reducers: {
         getAllQuotesPending(state, action: any) {
             state.listLoading = true;
+            state.searchValue = ""
             console.log("Login Pending Slice", action.payload)
         },
         getAllQuotesSuccess(state, action: any) {
             state.listLoading = false;
-            state.quoteData = action.payload.paginatedResults
-            console.log("quote success", action.payload.paginatedResults)
+            state.quotePageData = action.payload.paginatedResults
+            return state.quoteData = state.quotePageData,
+
+                console.log("quote success", action.payload.paginatedResults)
         },
         getAllQuotesFail(state, action: any) {
             state.listLoading = false;
@@ -33,6 +66,7 @@ const getAllQuotesSlice = createSlice({
         },
         searchQuoteSuccess(state, action: any) {
             state.listLoading = false;
+            // state.quotePageData = action.payload
             state.quoteData = action.payload
             console.log("Search success", action.payload)
         },

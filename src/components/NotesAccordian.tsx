@@ -1,39 +1,23 @@
 import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimation, Image, TouchableWithoutFeedback, Platform, Pressable } from 'react-native'
 import React, { useState, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
-import Colors from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 import QuoteTimelineCard from '../pages/Quotes/QuoteTimelineCard';
 import NotesCard from '../pages/Quotes/NotesCard';
-import AddNotes from '../pages/Quotes/AddNotes';
+import AddNotesCard from '../pages/Quotes/AddNotesCard';
+import { formatDate, getInitials } from './dataConverters';
 
 const { width, height } = Dimensions.get('screen')
-
-
-
-// const data = [
-//     {
-//         id: '00',
-//         title: 'Cancelled',
-//     },
-//     {
-//         id: '02',
-//         title: 'Scheduled',
-//     },
-//     {
-//         id: '03',
-//         title: 'In Progress',
-//     },
-//     {
-//         id: '04',
-//         title: 'Completed',
-//     },
-// ]
-
+const isAndroid = Platform.OS == 'android' ? true : false
 
 const NotesAccordian = ({ title, data }) => {
     const [visible, setVisible] = useState(false);
 
-    console.log("Notes DATA", title, data)
+    console.log("Notes ACC DATA", title, data)
+
+
+    // const date = formatDate(item.createdAt)
+
 
     const animationController = useRef(new Animated.Value(0)).current
 
@@ -70,7 +54,7 @@ const NotesAccordian = ({ title, data }) => {
 
     const arrowRotateAnimation = animationController.interpolate({
         inputRange: [0, .5,],
-        outputRange: ['0deg', '45deg',],
+        outputRange: ['0deg', '180deg',],
     })
 
     return (
@@ -82,12 +66,10 @@ const NotesAccordian = ({ title, data }) => {
                     <TouchableWithoutFeedback onPress={() => { arrowTransform(), setVisible(!visible) }}>
 
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: "100%", marginBottom: visible ? Colors.spacing : 0 }}>
-
-                            <Text style={{ fontSize: 13, color: Colors.littleGray, }}>{title} ({data.length})</Text>
-
+                            <Text style={{ fontSize: 18, fontWeight: isAndroid ? "900" : "600", color: Colors.grayOne }}> {title} ({data.length})</Text>
                             <TouchableWithoutFeedback onPress={() => { arrowTransform(), setVisible(!visible) }}>
                                 <Animated.View style={{ transform: [{ rotateZ: arrowRotateAnimation }] }}>
-                                    <Icon color={Colors.grayText} style={{}} name={visible ? "chevron-up" : "chevron-down"} size={22} />
+                                    <Icon color={Colors.grayOne} style={{}} name={visible ? "chevron-up" : "chevron-down"} size={22} />
                                 </Animated.View>
                             </TouchableWithoutFeedback>
 
@@ -96,23 +78,48 @@ const NotesAccordian = ({ title, data }) => {
                     </TouchableWithoutFeedback>
 
 
-
-
-                    <View style={[{ overflow: 'hidden' }]}>
+                    <View style={[{ overflow: 'hidden', }]}>
                         {visible && data.map((item, index) => {
+                            const date = formatDate(item.createdAt.substring(0, 24))
+                            return (
 
-                            return title === "Timeline" ? (<QuoteTimelineCard icon={item.icon} title={item.title} createdBy={item.createdBy} key={item.id} item={item} index={index} toggle={arrowTransform} />) : (<NotesCard name={item.name} date={item.date} img={item.img} note={item.note} key={item.id} />)
+                                <TouchableWithoutFeedback key={item.id}>
+                                    <View style={styles.box}>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            {/* getInitials */}
+                                            {!item.image ?
+
+                                                <View style={{ marginRight: Colors.spacing, width: 35, height: 35, borderRadius: 100, backgroundColor: Colors.green, alignItems: 'center', justifyContent: 'center' }}>
+                                                    <Text style={{ color: 'white', fontSize: 14, fontWeight: isAndroid ? "900" : "600", }}>{getInitials(item.name)}</Text>
+                                                </View>
+                                                :
+                                                <Image source={{ uri: 'https://randomuser.me/api/portraits/men/3.jpg' }} style={{ width: 35, height: 35, borderRadius: 100, marginRight: Colors.spacing, }} />
+                                            }
+                                            <View style={{ width: '85%' }}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+                                                    <Text style={{ color: Colors.grayOne, fontSize: 14, fontWeight: isAndroid ? "900" : "600", }}>{item.name}</Text>
+                                                    <Text style={{ color: Colors.grayText, fontSize: 10, }}>{date}</Text>
+                                                </View>
+                                                <Text style={{ color: Colors.grayText, fontSize: 10, fontWeight: isAndroid ? "900" : "600", }}>{item.email}</Text>
+
+                                                <Text style={{ textAlign: "justify", color: Colors.grayOne, fontSize: 12, marginTop: Colors.spacing }}>{"item.title, some manual notes, some manual notes, some manual notes, some manual notes, some manual notes, some manual notes, some manual notes, some manual asd asd  notes, some manual notes, some manual notes"}
+                                                </Text>
+                                            </View>
+
+                                        </View>
+                                        <Text style={{ color: Colors.grayOne, fontSize: 12, fontWeight: isAndroid ? "900" : "600", }}>{item.createdBy}</Text>
+                                    </View >
+                                </TouchableWithoutFeedback>
+
+                            )
                         })}
-
-                        {title === "Job Notes" ? visible ? <AddNotes /> : null : null}
-
 
                     </View>
 
 
 
                 </View>
-            </View>
+            </View >
         </>
     )
 }
@@ -121,30 +128,26 @@ export default NotesAccordian
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1, overflow: 'hidden'
     },
     taskTitle: {
-        paddingVertical: Platform.OS == 'android' ? 3 : 6,
+        paddingVertical: Platform.OS == 'android' ? Colors.spacing * 1.3 : Colors.spacing,
         paddingHorizontal: Colors.spacing,
         borderRadius: 4,
         borderWidth: 1.5,
-
-        borderColor: Colors.grayText,
+        borderColor: Colors.littleGray,
         position: 'relative',
     },
-    taskTitleBadge: {
-        position: 'absolute',
-        backgroundColor: 'white',
-        top: -8
-    },
+
 
 
     box: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginBottom: Colors.spacing * 2,
         justifyContent: 'space-between',
         marginHorizontal: Colors.spacing * .5,
-        marginBottom: Colors.spacing,
+
     },
 
 

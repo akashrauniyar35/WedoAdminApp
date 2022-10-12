@@ -1,6 +1,6 @@
 import { ActivityIndicator, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { loginPending, loginFail, loginSuccess } from '../../redux/authenticationSlice';
@@ -73,8 +73,8 @@ const Login = ({ navigation }) => {
           <View style={{ marginTop: Colors.spacing * 10 }}>
 
             <TextInput
-              style={{ fontSize: 16, backgroundColor: '#fff', padding: Colors.spacing, borderRadius: 5, }}
-              placeholderTextColor={Colors.black}
+              style={{ fontSize: 16, backgroundColor: '#fff', padding: Colors.spacing, borderRadius: 5, color: Colors.grayText }}
+              placeholderTextColor={Colors.grayText}
               placeholder={'Enter eamil'}
               onChangeText={value => setEmail(value)}
               defaultValue={email}
@@ -85,10 +85,11 @@ const Login = ({ navigation }) => {
                 secureTextEntry={hiddenPassword}
                 style={{
                   fontSize: 16,
+                  color: Colors.grayText,
                   width: '85%',
                   backgroundColor: '#fff', borderRadius: 5, padding: Colors.spacing,
                 }}
-                placeholderTextColor={Colors.black}
+                placeholderTextColor={Colors.grayText}
                 placeholder={'Password'}
                 onChangeText={value => setPassword(value)}
                 defaultValue={password}

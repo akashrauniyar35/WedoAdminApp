@@ -1,10 +1,11 @@
-import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimation, Image, TouchableWithoutFeedback, Platform, ActivityIndicator } from 'react-native'
-import React, { useState, useRef } from 'react'
+import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimation, Image, TouchableWithoutFeedback, Platform, ActivityIndicator, Pressable } from 'react-native'
+import React, { useState, useRef, useEffect } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
-import Colors from '../assets/Colors';
+import {Colors} from '../assets/Colors';
 import { useSelector, useDispatch } from 'react-redux'
-import { searchQuoteFail, searchQuotePending, searchQuoteSuccess } from '../redux/quoteTableSlice';
-import { searchQuote } from '../config/QuoteApi';
+import { getAllQuotesFail, getAllQuotesPending, getAllQuotesSuccess, searchQuoteFail, searchQuotePending, searchQuoteSuccess } from '../redux/quoteTableSlice';
+import { fetchAllQuotes, searchQuote } from '../config/QuoteApi';
+import { ColorSpace } from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('screen')
 
@@ -29,7 +30,7 @@ const data = [
     },
 ]
 
-const SearchBox = ({ type, }: string, onChange: any) => {
+const SearchBox = ({ type }: string) => {
     const [onPress, setOnPress] = useState(false);
     const animationController = useRef(new Animated.Value(0)).current
     const [searchValue, setSearchValue] = useState();
@@ -58,10 +59,28 @@ const SearchBox = ({ type, }: string, onChange: any) => {
             }
 
         }
+    }
 
+    const refreshHandler = async () => {
+        setSearchValue('')
+        dispatch(getAllQuotesPending('data'))
+        const p = 'payload test'
+        const x: any = await fetchAllQuotes(p)
 
+        if (x.data.status === "error") {
+            return dispatch(getAllQuotesFail(x.data.status));
+        }
+        // setData(x.data.paginatedResults)
+        dispatch(getAllQuotesSuccess(x.data))
+
+        console.log('response from all quotes', x.data)
 
     }
+
+    // useEffect(() => {
+    //     refreshHandler()
+
+    // }, [])
 
 
 
@@ -97,31 +116,43 @@ const SearchBox = ({ type, }: string, onChange: any) => {
 
             <View style={styles.container}>
                 <View style={[styles.taskTitle,]}>
-                    {type === "quote" ?
-                        <TextInput
-                            autoCapitalize="none"
-                            onChangeText={(value) => { searchHandler(value) }}
-                            style={{ fontSize: 13, marginTop: 2 }}
-                            value={searchValue ? searchValue : ''}
-                            placeholderTextColor={Colors.black}
-                            placeholder={searchValue ? searchValue : '....'}
-                        /> :
-                        <TextInput
-                            autoCapitalize="none"
-                            onChangeText={(e) => { arrowTransform(), setSearchValue(e) }}
-                            style={{ fontSize: 13, marginTop: 2 }}
-                            value={searchValue ? searchValue : ''}
-                            placeholderTextColor={Colors.black}
-                            placeholder={searchValue ? searchValue : '....'}
-                        />}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        {type === "quote" ?
 
-                    <View style={[styles.taskTitleBadge, { width: 70, flexDirection: 'row', alignItems: 'center' }]}>
-                        <Text style={{ fontSize: 12, color: Colors.black, paddingLeft: 6, padding: 2, backgroundColor: 'white' }}>Search</Text>
-                        <View style={{ backgroundColor: 'white', paddingHorizontal: 4, paddingRight: 6, }}>
+                            <TextInput
+                                autoCapitalize="none"
+                                onChangeText={(value) => { searchHandler(value) }}
+                                style={{ fontSize: 22, color: Colors.grayOne, width: '90%'}}
+                                value={searchValue ? searchValue : ''}
+                                placeholderTextColor={Colors.grayOne}
+                                placeholder={searchValue ? searchValue : '....'}
+                            />
+                            :
+                            <TextInput
+                                autoCapitalize="none"
+                                onChangeText={(e) => { arrowTransform(), setSearchValue(e) }}
+                                style={{ fontSize: 13, color: Colors.grayOne, width: '90%', }}
+                                value={searchValue ? searchValue : ''}
+                                placeholderTextColor={Colors.grayOne}
+                                placeholder={searchValue ? searchValue : '....'}
+                            />}
+
+                        {searchValue ?
+                            <Pressable onPress={() => refreshHandler()} style={{}}>
+                                <Icon name="ios-close-circle" size={28} color={Colors.grayOne} />
+                            </Pressable> : null}
+                    </View>
+
+                    <View style={[styles.taskTitleBadge, { width: 60, flexDirection: 'row', alignItems: 'center' }]}>
+                        <Text style={{ fontSize: 10, color: Colors.grayOne, paddingLeft: 6, padding: 2, fontWeight: '900' }}>Search</Text>
+                        <View style={{ paddingHorizontal: 4, paddingRight: 6, }}>
                             <Icon name="ios-search" size={14} color={Colors.green} />
                         </View>
                     </View>
-                    <View style={[styles.drowpDown, onPress && { overflow: 'hidden', marginTop: onPress && Colors.spacing * 2 }, { overflow: 'hidden', }]}>
+
+
+
+                    <View style={[styles.drowpDown, onPress && { overflow: 'hidden', }, { overflow: 'hidden', }]}>
                         {onPress && data.map((item) => {
                             return (
                                 <TouchableWithoutFeedback key={item.id} onPress={() => { setSearchValue(item.title), arrowTransform(), setOnPress(false) }}>
@@ -149,9 +180,10 @@ const styles = StyleSheet.create({
         placeHolderTextColor: {},
         paddingHorizontal: 14,
         borderRadius: 4,
-        paddingVertical: Platform.OS == 'android' ? 3 : 7,
-        borderWidth: 1.5,
-        borderColor: '#7E7E7E',
+        paddingTop: Platform.OS == 'android' ? 6 : 7,
+
+        borderWidth: 1,
+        borderColor: Colors.grayText,
         position: 'relative',
     },
     taskTitleBadge: {

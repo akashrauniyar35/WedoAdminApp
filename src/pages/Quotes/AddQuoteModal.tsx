@@ -1,8 +1,16 @@
-import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView } from 'react-native'
+import { Dimensions, Modal, Pressable, TextInput, SafeAreaView, StyleSheet, TouchableWithoutFeedback, FlatList, Text, View, ScrollView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import IconM from 'react-native-vector-icons/MaterialIcons';
+import ScheduleCard from './ScheduleCard';
+import { Colors } from '../../assets/Colors';
+import PropertyInfoCard from './PropertyInfoCard';
+import CustomerDetailsCard from './CustomerDetailsCard';
+import PaymensCard from './PaymensCard';
+import AddNotes from './AddNotesCard';
+import AddFullNotesCard from './AddFullNotesCard';
+import { useSelector } from 'react-redux';
 
-
+const isAndroid = Platform.OS == 'android' ? true : false
 const { width, height } = Dimensions.get('screen')
 
 const w = width * .95;
@@ -84,7 +92,6 @@ const AddQuoteModal = ({ isOpen, onPress, onClose }) => {
     }
 
 
-
     return (
         <>
             <View style={{}}>
@@ -100,60 +107,73 @@ const AddQuoteModal = ({ isOpen, onPress, onClose }) => {
                         <View style={{
                             flex: 1,
                             backgroundColor: textColor, width: width,
-                            padding: spacing * 2,
+                            paddingVertical: spacing * 2,
                         }}>
 
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: spacing * 2.5 }}>
+                            <SafeAreaView />
+                            <View style={{ paddingHorizontal: spacing * 2, marginBottom: spacing * 2, }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
 
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: colorOne, }}>Edit Task</Text>
-                                <Pressable
-                                    style={{ alignSelf: 'flex-end' }}
-                                    onPress={() => onPress()}
-                                >
-                                    <IconM color={colorOne} name="cancel" size={25} />
-                                </Pressable>
+                                    <Text style={{ fontSize: 24, fontWeight: isAndroid ? "900" : "600", color: colorOne, }}>Add Quote</Text>
+                                    <Pressable
+                                        style={{ alignSelf: 'flex-end' }}
+                                        onPress={() => onPress()}
+                                    >
+                                        <IconM color={Colors.grayOne} name="cancel" size={26} />
+                                    </Pressable>
 
-                            </View>
-
-
-
-                            {/* 
-                            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'> */}
-
-                            <View style={{ marginVertical: spacing * 2 }}>
-                                <TextInput
-                                    style={styles.taskTitle}
-                                    // onChangeText={onChangeNumber}
-                                    // value={number}
-                                    placeholderTextColor={grayText}
-                                    placeholder="Fan Fix Burwood"
-                                />
-                                <View style={styles.taskTitleBadge}><Text style={{ fontSize: 12, color: grayText, paddingHorizontal: 6, padding: 2, backgroundColor: 'white' }}>Task Title *</Text></View>
-                            </View>
-
-
-
-
-
-
-
-
-
-
-
-
-                            <TouchableWithoutFeedback onPress={() => { }}>
-                                <View style={{ backgroundColor: colorOne, marginBottom: spacing * 2, borderRadius: 5, padding: 14, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: textColor, fontSize: 16, fontWeight: '600' }}>UPDATE</Text>
                                 </View>
-                            </TouchableWithoutFeedback>
+
+                            </View>
 
 
-                            {/* </ScrollView> */}
+                            <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' >
+
+                                <View style={{ paddingHorizontal: spacing * 2, }}>
+
+                                    <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                        <PropertyInfoCard />
+                                    </View>
+
+                                    <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                        <ScheduleCard />
+                                    </View>
+
+                                    <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                        <CustomerDetailsCard />
+                                    </View>
+
+                                    {/* <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                        <CustomerDetailsCard />
+                                    </View> */}
+
+                                    <View style={{ marginBottom: Colors.spacing * 2, }}>
+                                        <AddFullNotesCard />
+                                    </View>
+
+                                    <View style={{ marginBottom: Colors.spacing * 2 }}>
+                                        <PaymensCard />
+                                    </View>
+
+                                    <View style={{ marginBottom: Colors.spacing * 2, }}>
+                                        <Pressable onPress={() => { }} >
+                                            <View style={{ paddingVertical: Colors.spacing, backgroundColor: Colors.green, borderRadius: 5, alignItems: 'center', justifyContent: 'center' }}>
+                                                <Text style={{ color: 'white', fontSize: 16, fontWeight: isAndroid ? "900" : "600" }}>Save</Text>
+                                            </View>
+                                        </Pressable>
+                                    </View>
+
+                                </View>
+
+                            </ScrollView>
+
+
+
 
                         </View>
                     </View >
                 </Modal >
+
             </View >
 
 

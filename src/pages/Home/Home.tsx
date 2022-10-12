@@ -1,6 +1,6 @@
 import { Dimensions, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import colors from '../../assets/Colors';
+import { Colors } from '../../assets/Colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import BarChart from '../../components/BarChart';
 import LineChart from '../../components/LineChart';
@@ -30,15 +30,15 @@ const techniciansList = [
 
 const Banner = () => {
     return (
-        <View style={{ padding: colors.spacing * 2, backgroundColor: colors.black, borderRadius: colors.spacing }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: colors.spacing }}>
+        <View style={{ padding: Colors.spacing * 2, backgroundColor: Colors.black, borderRadius: Colors.spacing }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: Colors.spacing }}>
                 <Text style={{ fontSize: 14, fontWeight: '400', color: 'white', }}>Total Expences</Text>
                 <Image source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2202/2202112.png' }} style={{ width: 40, height: 40 }} />
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                 <Text style={{ color: 'white', fontSize: 24, fontWeight: '600' }}>$ 2,000</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: colors.skyColor, paddingHorizontal: colors.spacing, paddingVertical: colors.spacing * .3, borderRadius: 4 }}>
-                    <Text style={{ color: colors.black, fontSize: 12, fontWeight: '500' }}>Monthly</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: Colors.skyColor, paddingHorizontal: Colors.spacing, paddingVertical: Colors.spacing * .3, borderRadius: 4 }}>
+                    <Text style={{ color: Colors.black, fontSize: 12, fontWeight: '500' }}>Monthly</Text>
                     {/* <Icon name='ios-chevron-down' size={14} style={{ marginLeft: 10 }} /> */}
                 </View>
             </View>
@@ -62,21 +62,21 @@ const Home = ({ navigation }) => {
     return (
         <>
             <SafeAreaView />
-            <View style={{ paddingHorizontal: colors.spacing * 2, backgroundColor: "white", }}>
+            <View style={{ paddingHorizontal: Colors.spacing * 2, backgroundColor: "white", }}>
 
                 <Header nav={navigation} title="Dashboard" />
-                <View style={{ marginBottom: colors.spacing * 1 }} />
+                <View style={{ marginBottom: Colors.spacing * 1 }} />
 
                 <Banner />
-                <View style={{ marginBottom: colors.spacing * 2 }} />
+                <View style={{ marginBottom: Colors.spacing * 2 }} />
 
-                <Text style={{ color: colors.black, fontWeight: '600' }}>Expense Types</Text>
-                <View style={{ marginBottom: colors.spacing * 1 }} />
+                <Text style={{ color: Colors.black, fontWeight: '600' }}>Expense Types</Text>
+                <View style={{ marginBottom: Colors.spacing * 1 }} />
                 <BarChart />
-                <View style={{ marginBottom: colors.spacing * 2 }} />
+                <View style={{ marginBottom: Colors.spacing * 2 }} />
 
-                <Text style={{ color: colors.black, fontWeight: '600' }}>Expense Graph</Text>
-                <View style={{ marginBottom: colors.spacing * 1 }} />
+                <Text style={{ color: Colors.black, fontWeight: '600' }}>Expense Graph</Text>
+                <View style={{ marginBottom: Colors.spacing * 1 }} />
                 <LineChart />
 
 

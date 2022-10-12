@@ -10,7 +10,7 @@ import Appointments from '../pages/Drawer/Appointments';
 import Expenses from '../pages/Drawer/Expenses';
 
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
-import Colors from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 
 
 
@@ -33,8 +33,20 @@ function MyTabs() {
 
             })}>
 
-            <Tab.Screen name="Quotes" component={Quotes}
+
+            <Tab.Screen name="Notifications" component={Notifications}
                 options={{
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ focused, color }) => (
+                        <IconM name="bell" color={color} size={26} style={{ transform: [focused ? { scale: 1.3 } : { scale: .8 }] }} />
+                    ),
+                }} />
+
+            <Tab.Screen name="Quotes" component={Quotes}
+
+
+                options={{
+
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, focused }) => (
                         <IconM name="file" color={color} size={26} style={{ transform: [focused ? { scale: 1.3 } : { scale: .8 }] }} />
@@ -70,13 +82,7 @@ function MyTabs() {
 
 
 
-            <Tab.Screen name="Notifications" component={Notifications}
-                options={{
-                    tabBarLabel: 'Home',
-                    tabBarIcon: ({ focused, color }) => (
-                        <IconM name="bell" color={color} size={26} style={{ transform: [focused ? { scale: 1.3 } : { scale: .8 }] }} />
-                    ),
-                }} />
+
         </Tab.Navigator>
     )
 }

@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { endPoint } from './index';
 
-export const fetchAllQuotes = (data: any) => {
-    console.log("searchValue", data)
+export const fetchAllQuotes = (page: any) => {
+    console.log("page", page)
     return new Promise(async (resolve, reject) => {
 
         try {
-            const res: any = await endPoint.get("quote/all?page=1&limit=10")
+            const res: any = await endPoint.get(`quote/all?page=${page}&limit=10`)
             console.log(res)
             resolve(res);
 

@@ -1,17 +1,18 @@
-import { Dimensions, FlatList, Modal, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
+import { Dimensions, FlatList, Modal, Platform, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
-import Colors from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 import { Calendar } from 'react-native-calendars'
 import CalandarDatePicker from './CalandarDatePicker';
 
+const isAndroid = Platform.OS == 'android' ? true : false
 
 const { width, height } = Dimensions.get('screen')
 
 const DataFilter = () => {
 
-    const [filterData, setFilterData] = useState([{ id: '00', dateRange: '01/08/2022 - 31/08/2022', minPrice: '500', maxPrice: '1000', location: 'Sydney NSW 2000', services: 'EOL', cancelled: true, paid: false, completed: true }])
+    const [filterData, setFilterData] = useState([{ id: '00', dateRange: '01/08/2022 - 31/08/2022', minPrice: '500', maxPrice: '1600', location: 'Sydney NSW 2000', services: 'EOL', cancelled: true, paid: false, completed: true }])
 
 
     const [filtersEnablet, setFiltersEnabled] = useState(false);
@@ -39,10 +40,17 @@ const DataFilter = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                        <IconM name="currency-usd" size={16} color={Colors.black} style={{ marginLeft: -8 }} />
-                        <Text style={{ fontSize: 10 }}>500</Text>
-                        <Text style={{ fontSize: 10 }}> to </Text>
-                        <Text style={{ fontSize: 10 }}>1000</Text>
+
+                        <View style={{
+                            marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                            shadowOffset: { width: 0, height: 1 },
+                            shadowOpacity: .2, elevation: 3,
+                        }}>
+                            <Icon name="logo-usd" size={16} color={Colors.littleGray} />
+                        </View>
+                        <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600", fontWeight: isAndroid ? "900" : "600" }}>500</Text>
+                        <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}> to </Text>
+                        <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>1600</Text>
                     </View>
                 </View>
             )
@@ -52,8 +60,14 @@ const DataFilter = () => {
         const DateRangeFilter = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="calendar-outline" size={16} color={Colors.darkBlue} style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: 10 }}>01/08/2022 to 31/08/2022</Text>
+                    <View style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }}>
+                        <Icon name="calendar-outline" size={16} color={Colors.green} />
+                    </View>
+                    <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>01/08/2022 to 31/08/2022</Text>
                 </View>
             )
         }
@@ -61,8 +75,14 @@ const DataFilter = () => {
         const Location = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="location-outline" size={16} color={Colors.red} style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: 10 }}>Sydney NSW</Text>
+                    <View style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }}>
+                        <Icon name="location-outline" size={16} color={Colors.red} />
+                    </View>
+                    <Text style={{ fontSize: 16, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Sydney NSW</Text>
                 </View>
             )
         }
@@ -70,8 +90,12 @@ const DataFilter = () => {
         const Services = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <IconM name="vacuum-outline" size={16} color={Colors.green} style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: 10 }}>Services</Text>
+                    <IconM name="vacuum-outline" size={16} color={Colors.green} style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }} />
+                    <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Services</Text>
                 </View>
             )
         }
@@ -79,32 +103,48 @@ const DataFilter = () => {
         const Paid = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="cash-outline" size={16} color={Colors.paid} style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: 10 }}>Paid</Text>
+                    <Icon name="cash-outline" size={16} color={Colors.paid} style={{
+                        marginRight: 5, backgroundColor: 'white', padding: 10, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }} />
+                    <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Paid</Text>
                 </View>
             )
         }
         const UnPaid = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="cash-outline" size={16} color={Colors.unPaid} style={{ marginRight: 5 }} />
-                    <Text style={{ fontSize: 10 }}>Unpaid</Text>
+                    <Icon name="cash-outline" size={16} color={Colors.unPaid} style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }} />
+                    <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Unpaid</Text>
                 </View>
             )
         }
         const Cancelled = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="close-circle" size={16} color={Colors.red} style={{ marginRight: 4 }} />
-                    <Text style={{ fontSize: 10 }}>Cancelled</Text>
+                    <Icon name="close-circle" size={16} color={Colors.red} style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }} />
+                    <Text style={{ fontSize: 14, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Cancelled</Text>
                 </View>
             )
         }
         const Completed = () => {
             return (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: Colors.spacing * 2 }}>
-                    <Icon name="checkmark-circle" size={16} color={Colors.paid} style={{ marginRight: 4 }} />
-                    <Text style={{ fontSize: 10 }}>Completed</Text>
+                    <Icon name="checkmark-circle" size={16} color={Colors.paid} style={{
+                        marginRight: 5, backgroundColor: 'white', padding: Colors.spacing * .5, borderRadius: 100, shadowRadius: 2,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowOpacity: .2, elevation: 3,
+                    }} />
+                    <Text style={{ fontSize: 16, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600" }}>Completed</Text>
                 </View>
             )
         }
@@ -169,12 +209,12 @@ const DataFilter = () => {
                             shadowRadius: 2,
                             shadowOffset: { width: 0, height: 1 },
                             shadowOpacity: .2,
-                            borderRadius: 10,
+                            borderRadius: 16,
                         }}>
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
 
-                                <Text style={{ fontSize: 18, fontWeight: '600', color: Colors.black, }}>Filter</Text>
+                                <Text style={{ fontSize: 18, fontWeight: '600', color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600", }}>Filter</Text>
                                 <Pressable
                                     style={{ alignSelf: 'flex-end' }}
                                     onPress={() => toggleMainModal()}
@@ -193,7 +233,7 @@ const DataFilter = () => {
 
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                                <Text style={{ fontSize: 12, color: Colors.black, }}>Pick Date / Date Range</Text>
+                                <Text style={{ fontSize: 12, color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600", }}>Pick Date / Date Range</Text>
                             </View>
 
 
@@ -202,7 +242,7 @@ const DataFilter = () => {
                             {/* //Apply */}
                             <Pressable >
                                 <View style={{ backgroundColor: Colors.green, marginBottom: Colors.spacing * 2, borderRadius: 5, paddingVertical: Colors.spacing * .5, alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ color: Colors.black, fontSize: 16, fontWeight: '600' }}>Apply</Text>
+                                    <Text style={{ color: Colors.grayOne, fontWeight: isAndroid ? "900" : "600", fontSize: 16, fontWeight: '600' }}>Apply</Text>
                                 </View>
                             </Pressable>
 
@@ -221,14 +261,15 @@ const DataFilter = () => {
 
     return (
         <>
-            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: Colors.spacing * .5 }}>
 
 
-                <View style={{ width: '90%' }}>
+
+                <View style={{ width: '90%', }}>
                     <View style={{}}>
 
                         <FlatList
-                            contentContainerStyle={{ alignItems: 'center', justifyContent: 'space-between' }}
+                            contentContainerStyle={{ alignItems: 'center', justifyContent: 'space-between', padding: Colors.spacing * .5, }}
                             horizontal
                             showsHorizontalScrollIndicator={false}
                             data={filterData}
@@ -238,22 +279,21 @@ const DataFilter = () => {
 
                     </View>
 
-
                 </View>
 
-                <View style={{ width: '10%', }}>
+                <View style={{ paddingLeft: Colors.spacing, }}>
                     <Pressable onPress={() => toggleMainModal()}>
                         <View style={{
                             backgroundColor: Colors.green,
-                            width: 25,
-                            height: 25,
+                            width: 36,
+                            height: 36,
                             alignSelf: 'center',
-                            borderRadius: 100,
+                            borderRadius: 160,
                             padding: 4,
                             flexDirection: "column",
                             alignItems: 'center', justifyContent: 'center'
                         }}>
-                            <Icon name="funnel" size={14} color={"#fff"} style={{ top: 2 }} />
+                            <Icon name="funnel" size={24} color={"#fff"} style={{ top: 2 }} />
                         </View>
                     </Pressable>
                 </View>

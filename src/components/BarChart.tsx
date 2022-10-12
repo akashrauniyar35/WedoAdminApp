@@ -2,7 +2,7 @@ import { Animated, Dimensions, LayoutAnimation, StyleSheet, Text, View } from 'r
 import React, { useEffect, useRef, useState } from 'react'
 
 import { BarChart, } from 'react-native-chart-kit';
-import colors from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 
 const { width, height } = Dimensions.get('window')
 
@@ -14,13 +14,13 @@ const data = {
     datasets: [
         {
             data: [35, 45, 58, 20, 99, 43],
-            colors: [
-                (opacity = 1) => colors.red,
-                (opacity = 1) => colors.green,
-                (opacity = 1) => colors.darkBlue,
+            Colors: [
+                (opacity = 1) => Colors.red,
+                (opacity = 1) => Colors.green,
+                (opacity = 1) => Colors.darkBlue,
                 (opacity = 1) => 'orange',
-                (opacity = 1) => colors.skyColor,
-                (opacity = 1) => colors.lightRed,
+                (opacity = 1) => Colors.skyColor,
+                (opacity = 1) => Colors.lightRed,
             ]
         }
     ]
@@ -29,7 +29,7 @@ const data = {
 const BarChartGraph = () => {
 
     const chartConfig = {
-        backgroundGradientFrom: colors.skyColor,
+        backgroundGradientFrom: Colors.skyColor,
         backgroundGradientTo: "#fff",
         barPercentage: 0.5,
         height: 1000,
@@ -37,7 +37,7 @@ const BarChartGraph = () => {
         fillShadowGradientOpacity: 1,
         decimalPlaces: 0, // optional, defaults to 2dp
         color: (opacity = 1) => `rgba(1, 122, 205, 1)`,
-        labelColor: (opacity = 1) => colors.black,
+        labelColor: (opacity = 1) => Colors.black,
 
         style: {
             borderRadius: 16,
@@ -51,7 +51,7 @@ const BarChartGraph = () => {
         propsForLabels: {
             fontWeight: '400',
 
-            color: colors.black
+            color: Colors.black
             // fontFamily: "Bogle-Regular",
         },
     };

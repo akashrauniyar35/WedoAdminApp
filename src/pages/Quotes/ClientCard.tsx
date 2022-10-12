@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ClientCard = () => {

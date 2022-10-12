@@ -1,12 +1,15 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Platform, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import Colors from '../../assets/Colors'
+import {Colors} from '../../assets/Colors'
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
+
+const isAndroid = Platform.OS == 'android' ? true : false
 const TotalsCard = () => {
     return (
-        <View style={{ paddingHorizontal: Colors.spacing * 1, }}>
+        <View style={{}}>
+            <Text style={{ fontSize: 16, color: Colors.green, marginBottom: Colors.spacing, fontWeight: isAndroid ? "900" : "600", }}>Totals</Text>
             <View style={{
                 backgroundColor: 'white',
                 padding: Colors.spacing,
@@ -16,7 +19,6 @@ const TotalsCard = () => {
                 shadowOpacity: .2,
                 shadowOffset: { width: 0, height: 1 },
             }}>
-                <Text style={{ fontSize: 13, color: Colors.littleGray, marginBottom: Colors.spacing }}>Totals</Text>
 
 
                 {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: Colors.spacing * .25 }}>

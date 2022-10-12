@@ -6,7 +6,7 @@ import { Dimensions, Image, Pressable, ActivityIndicator, SafeAreaView, StyleShe
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import Colors from '../assets/Colors';
+import {Colors} from '../assets/Colors';
 import Divider from '../components/Divider';
 import { logoutPending, logoutSuccess } from '../redux/authenticationSlice';
 
