@@ -1,8 +1,8 @@
 import { Animated, Dimensions, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { BarChart, } from 'react-native-chart-kit';
 import { Colors } from '../assets/Colors';
+import { BarChart } from 'react-native-chart-kit';
 
 const { width, height } = Dimensions.get('window')
 

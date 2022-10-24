@@ -5,7 +5,6 @@ import SearchBox from '../../components/SearchBox'
 import {Colors} from '../../assets/Colors'
 import BookingsCard from './BookingsCard'
 import Icon from 'react-native-vector-icons/Ionicons';
-import DataFilter from '../../components/DataFilter'
 import TablePageButtons from '../../components/TablePageButtons'
 const pages = [
   {
@@ -164,7 +163,6 @@ const Bookings = ({ navigation }) => {
 
           </View>
           <View style={{ marginBottom: Colors.spacing * 1 }} />
-          <DataFilter />
           <View style={{ marginBottom: Colors.spacing * 1 }} />
         </View>
 

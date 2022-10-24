@@ -1,17 +1,17 @@
 import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 
 import authenticationSlice from './authenticationSlice';
-import bookingTableSlice from './quoteTableSlice';
+import jobSlice from './jobSlice';
 // import quoteSearchSlice from './extraSlice';
 import logger from 'redux-logger'
-import addQuoteSlice from './addQuoteSlice';
+import addJobSlice from './addJobSlice';
 
 
 export default configureStore({
     reducer: {
         authReducer: authenticationSlice,
-        quoteTableReducer: bookingTableSlice,
-        addQuoteReducer: addQuoteSlice
+        jobReducer: jobSlice,
+        addJobReducer: addJobSlice
         // quoteSearchReducer: quoteSearchSlice
     },
     middleware: [logger],

@@ -1,16 +1,24 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Colors, isAndroid } from '../assets/Colors'
+import Icon from 'react-native-vector-icons/Ionicons';
 
+const InputBox = ({ maxLength, onChange, keyboardType, onPress, editable, rounded, placeholderSize, lable, placeholder, size, icon, bg, phColor, itemsCenter, bold, capitalize, }) => {
 
-const InputBox = ({ lable, placeholder, rounded }) => {
     return (
-        <View>
-            {lable != "" && <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600", marginBottom: Colors.spacing }}>{lable}</Text>}
-            <View style={[styles.box, { borderWidth: isAndroid ? .35 : 0, borderRadius: rounded === true ? Colors.spacing * Colors.spacing : Colors.spacing * .5 }]}>
-                <TextInput placeholderTextColor={'#5A5A5A'} placeholder={placeholder} style={[styles.input, { paddingVertical: Colors.spacing * .85, marginLeft: rounded === true ? Colors.spacing * 2 : Colors.spacing }]} />
+        <>
+            {lable && < Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "700", marginBottom: Colors.spacing }}>{lable}</Text>}
+
+            <View style={[styles.box, { height: size, justifyContent: itemsCenter ? 'center' : "flex-start", backgroundColor: bg ? bg : 'white', paddingHorizontal: rounded === true ? Colors.spacing * 2 : Colors.spacing, borderRadius: rounded === true ? Colors.spacing * Colors.spacing : Colors.spacing * .75, borderWidth: isAndroid ? .35 : 0, borderColor: Colors.maidlyGrayText }]}>
+
+                {icon && <Icon name={icon} size={18} color={Colors.maidlyGrayText} style={{ marginRight: Colors.spacing, }} />}
+
+                <TextInput maxLength={maxLength ? maxLength : 50} autoCapitalize="none" keyboardType={keyboardType} onChangeText={(value) => onChange(value)} onPressIn={onPress} editable={editable} placeholderTextColor={phColor ? phColor : Colors.maidlyGrayText} placeholder={placeholder} style={{ width: '100%', textAlign: itemsCenter ? 'center' : 'left', fontSize: placeholderSize ? placeholderSize : 16, color: phColor ? phColor : Colors.maidlyGrayText, fontWeight: bold ? "bold" : isAndroid ? "600" : "300" }} />
+
             </View>
-        </View>
+        </>
+
+
     )
 }
 
@@ -18,12 +26,14 @@ export default InputBox
 
 const styles = StyleSheet.create({
     box: {
-        backgroundColor: 'white',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: Colors.maidlyGrayText,
         shadowRadius: 2,
         shadowOffset: { width: 0, height: .5 },
         shadowOpacity: .2,
-        shadowColor: Colors.grayOne, elevation: 2,
-
+        elevation: 2,
+        shadowColor: Colors.madidlyThemeBlue,
     },
     input: {
         borderColor: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600",

@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../assets/Colors';
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllQuotesFail, getAllQuotesPending, getAllQuotesSuccess, searchQuoteFail, searchQuotePending, searchQuoteSuccess } from '../redux/quoteTableSlice';
-import { fetchAllQuotes, searchQuote } from '../config/QuoteApi';
+import { getAllQuotesFail, getAllQuotesPending, getAllQuotesSuccess, searchQuoteFail, searchQuotePending, searchQuoteSuccess } from '../redux/jobSlice';
+import { fetchAllQuotes, searchQuote } from '../config/JobApi';
 import { ColorSpace } from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get('screen')

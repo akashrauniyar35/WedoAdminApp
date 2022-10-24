@@ -7,6 +7,8 @@ import PeriodSelector from './PeriodSelector';
 import StatusCard from './Sc';
 import SelectionCard from './SelectionCard';
 import InputBox from './InputBox';
+import AddImages from './AddImages';
+import AddCategory from './AddCategory';
 
 const isAndroid = Platform.OS == 'android' ? true : false
 const { width, height } = Dimensions.get('screen')
@@ -58,7 +60,7 @@ const scheduleData = [
 
 
 const AddCheckList = ({ onPress, isOpen, title }) => {
-
+    const checkList = "Checklist one"
 
     return (
 
@@ -71,7 +73,7 @@ const AddCheckList = ({ onPress, isOpen, title }) => {
                 <View style={{ flex: 1, alignItems: 'center', backgroundColor: Colors.transparentGloss, justifyContent: 'center', }}>
                     <SafeAreaView />
                     <View style={{
-                        flex: .5,
+                        flex: .85,
                         width: width * .9,
 
                     }}>
@@ -89,7 +91,7 @@ const AddCheckList = ({ onPress, isOpen, title }) => {
                             shadowColor: Colors.grayOne,
 
                         }}>
-                            <Text style={{ fontSize: 18, color: "white", fontWeight: isAndroid ? "900" : "600" }}>{"Filter Jobs"}</Text>
+                            <Text style={{ fontSize: 18, color: "white", fontWeight: isAndroid ? "900" : "600" }}>{title}</Text>
                         </View>
 
 
@@ -97,7 +99,7 @@ const AddCheckList = ({ onPress, isOpen, title }) => {
 
 
                             <View style={{ marginBottom: Colors.spacing * 2 }}>
-                                <InputBox rounded={true} lable="Item name" placeholder="Add item name here..." />
+                                <InputBox  rounded={true} lable="Item name" placeholder="Add item name here..." />
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Colors.spacing }}>
                                     <IconM name="checkbox-blank-outline" size={20} color={Colors.maidlyGrayText} />
                                     <Text style={{ marginLeft: Colors.spacing, fontSize: 14, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600" }}>Required</Text>
@@ -105,19 +107,31 @@ const AddCheckList = ({ onPress, isOpen, title }) => {
                                 </View>
                             </View>
 
-
-
                             <View style={{ marginTop: Colors.spacing }}>
-                                <SelectionCard rounded={true} data={scheduleData} type={'filter'} label="Status" />
+                                <AddImages rounded={true} />
+                            </View>
+
+                            <View style={{ marginTop: Colors.spacing * 2 }}>
+                                <SelectionCard
+                                    placeholder={checkList.toUpperCase()}
+                                    placeHolderTextColor={Colors.maidlyGrayText}
+                                    rounded={true} data={scheduleData} type={'filter'} label="Status"
+                                />
+                            </View>
+
+
+
+                            <View style={{ marginTop: Colors.spacing * 2, }}>
+                                <AddCategory rounded={true} />
                             </View>
 
 
                             <View style={styles.footer}>
                                 <Pressable onPress={onPress}>
-                                    <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600", }}>Cancel</Text>
+                                    <Text style={{ fontSize: 13, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600", }}>Cancel</Text>
                                 </Pressable>
                                 <Pressable style={styles.applyButton} >
-                                    <Text style={{ fontSize: 16, color: 'white', fontWeight: isAndroid ? "900" : "600", }}>Save</Text>
+                                    <Text style={{ fontSize: 13, color: 'white', fontWeight: isAndroid ? "900" : "600", }}>Save</Text>
                                 </Pressable>
                             </View>
 
@@ -160,7 +174,7 @@ const styles = StyleSheet.create({
         borderRadius: Colors.spacing * Colors.spacing, alignItems: 'center', justifyContent: 'center', paddingVertical: Colors.spacing * 1,
     },
     footer: {
-        marginTop: Colors.spacing * 2,
+        marginTop: Colors.spacing * 4,
         flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'flex-end'
     }
 

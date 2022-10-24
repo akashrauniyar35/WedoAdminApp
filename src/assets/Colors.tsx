@@ -21,7 +21,7 @@ export const Colors = {
     madlyBGBlue: '#F2F7F8',
     madidlyThemeBlue: '#013F80',
     maidlyGrayText: "#5A5A5A",
-
+    dartTextGray: '#333333',
     completedGreen: "#27b82f",
     completedGreenBG: '#daf9dc',
     inProgreessOrange: '#F6BD59',

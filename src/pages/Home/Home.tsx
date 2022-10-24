@@ -9,7 +9,7 @@ import Header from '../../components/Header';
 
 import { useSelector, useDispatch } from 'react-redux'
 
-
+import AddJob from '../Add/AddJob'
 
 const { width, height } = Dimensions.get('window')
 const techniciansList = [
@@ -78,8 +78,6 @@ const Home = ({ navigation }) => {
                 <Text style={{ color: Colors.black, fontWeight: '600' }}>Expense Graph</Text>
                 <View style={{ marginBottom: Colors.spacing * 1 }} />
                 <LineChart />
-
-
             </View>
         </>
     )

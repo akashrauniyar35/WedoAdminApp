@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { LineChart } from 'react-native-chart-kit';
-import {Colors} from '../assets/Colors';
+import { Colors } from '../assets/Colors';
 
 const { width, height } = Dimensions.get('window')
 
@@ -29,7 +29,6 @@ const LineChartGraph = () => {
                     'May',
                     'Jun',
                 ],
-
                 datasets: [
                     {
                         data: [20, 45, 28, 80, 99, 34],
@@ -37,16 +36,17 @@ const LineChartGraph = () => {
                     },
                 ],
             }}
+
                 width={width * .9}
-                height={220}
+                height={180}
                 bezier
                 yAxisLabel="$"
                 chartConfig={{
                     backgroundColor: '#c92ac7',
-                    backgroundGradientFrom: Colors.lightGlass,
+                    backgroundGradientFrom: Colors.madidlyThemeBlue,
                     backgroundGradientTo: '',
                     decimalPlaces: 2,
-                    color: (opacity = 1) => Colors.darkBlue,
+                    color: (opacity = 1) => "white",
                     style: {
                         borderRadius: 16,
                     },

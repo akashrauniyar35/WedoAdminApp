@@ -2,9 +2,9 @@ import { StyleSheet, Text, Dimensions, View, TextInput, Animated, LayoutAnimatio
 import React, { useState, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../assets/Colors';
-import QuoteTimelineCard from '../pages/Quotes/QuoteTimelineCard';
-import NotesCard from '../pages/Quotes/NotesCard';
-import AddNotesCard from '../pages/Quotes/AddNotesCard';
+import QuoteTimelineCard from '../pages/Extra/QuoteTimelineCard';
+import NotesCard from '../pages/Extra/NotesCard';
+import AddNotesCard from '../pages/Extra/AddNotesCard';
 import { formatDate, getInitials } from './dataConverters';
 
 const { width, height } = Dimensions.get('screen')

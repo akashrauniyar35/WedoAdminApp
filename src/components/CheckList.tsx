@@ -1,14 +1,13 @@
-import { Dimensions, Modal, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
+import { Dimensions, FlatList, Modal, Platform, Pressable, SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Colors } from '../assets/Colors';
+import { Colors, HEIGHT } from '../assets/Colors';
 import SelectTechnicianCard from './SelectionCard';
 import PeriodSelector from './PeriodSelector';
 import StatusCard from './Sc';
 import SelectionCard from './SelectionCard';
 import CheckListCard from './CheckListCard';
 import AddCheckList from './AddCheckList';
-
 const isAndroid = Platform.OS == 'android' ? true : false
 const { width, height } = Dimensions.get('screen')
 
@@ -41,11 +40,20 @@ const data = [
         date: '12/10/2022',
         required: false
     },
+    {
+        id: '02',
+        category: 'StrathField Cleaning Contract Category',
+        lable: 'Take out bins on street',
+        name: 'Milan Adhikari',
+        status: 'Completed',
+        date: '12/10/2022',
+        required: false
+    },
 ];
 
 
 const Checklist = ({ onPress, isOpen, title }) => {
-    const [defaultChecklist, setDefaultChecklist] = useState(false);
+    const [defaultChecklist, setDefaultChecklist] = useState(true);
     const [addCheckList, setAddChecklist] = useState(false);
 
     const toggleDefaultChecklist = () => {
@@ -123,13 +131,28 @@ const Checklist = ({ onPress, isOpen, title }) => {
 
 
                             <View style={{ marginVertical: Colors.spacing * 2 }}>
-                                <ScrollView showsVerticalScrollIndicator={false}>
-                                    {data.map((item) => {
-                                        return (
-                                            <CheckListCard required={item.required} key={item.id} status={item.status} category={item.category} lable={item.lable} name={item.name} date={item.date} />
-                                        )
-                                    })}
-                                </ScrollView>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: Colors.spacing * 2 }}>
+
+                                    <Text style={{ marginLeft: Colors.spacing, fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "600" : "300", }}>Use Default Checklist</Text>
+                                    <Switch
+                                        trackColor={{ false: "#767577", true: Colors.madidlyThemeBlue }}
+                                        thumbColor={'white'}
+
+                                        onValueChange={toggleDefaultChecklist}
+                                        value={defaultChecklist}
+                                    />
+                                </View>
+
+                                <FlatList
+                                    showsVerticalScrollIndicator={false}
+                                    contentContainerStyle={{ paddingBottom: Colors.spacing * 20 }}
+                                    data={data} keyExtractor={item => item.id}
+                                    renderItem={({ item }) =>
+
+                                        <CheckListCard required={item.required} key={item.id} status={item.status} category={item.category} lable={item.lable} name={item.name} date={item.date} />
+
+                                    } />
                             </View>
 
 
@@ -139,7 +162,7 @@ const Checklist = ({ onPress, isOpen, title }) => {
 
 
                 </View>
-                <AddCheckList isOpen={addCheckList} onPress={toggleAddChecklist} />
+                <AddCheckList isOpen={addCheckList} onPress={toggleAddChecklist} title="Add item to Checklist" />
             </Modal >
         </>
 

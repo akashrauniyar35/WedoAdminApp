@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 1
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { quoteDatePickPending, quoteDatePickSuccess, quoteTimePickSuccess } from '../redux/addQuoteSlice';
+import { quoteDatePickPending, quoteDatePickSuccess, quoteTimePickSuccess } from '../redux/addJobSlice';
 import { useDispatch } from 'react-redux';
 import { formatDate } from './dataConverters';
 

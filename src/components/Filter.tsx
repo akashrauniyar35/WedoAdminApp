@@ -112,7 +112,7 @@ const Filter = ({ onPress, isOpen, title }) => {
                         <View style={styles.container}>
 
 
-                            <SelectionCard border={true} rounded={true} data={data} placeholder={"Select Technician"} type={'filter'} label="Technician" />
+                            <SelectionCard phColor={Colors.maidlyGrayText} border={true} rounded={true} data={data} placeholder={"Select Technician"} type={'filter'} label="Technician" />
 
 
                             <View style={{ marginTop: Colors.spacing }}>
@@ -120,7 +120,7 @@ const Filter = ({ onPress, isOpen, title }) => {
                             </View>
 
                             <View style={{ marginTop: Colors.spacing }}>
-                                <SelectionCard border={true} rounded={true} data={scheduleData} placeholder={""} type={'filter'} label="Status" />
+                                <SelectionCard phColor={Colors.maidlyGrayText} border={true} rounded={true} data={scheduleData} type={'filter'} label="Status" placeholder="Select status" />
                             </View>
 
 
@@ -151,7 +151,7 @@ export default Filter
 
 const styles = StyleSheet.create({
     filterStyling: {
-        backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', marginVertical: Colors.spacing * 1.5, paddingHorizontal: Colors.spacing * 2, paddingVertical: Colors.spacing * 1.75,
+        backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', marginVertical: Colors.spacing * 1.5, paddingHorizontal: Colors.spacing * 2, height: 55,
         shadowRadius: 1,
         shadowOffset: { width: 0, height: .5 },
         shadowOpacity: .2,

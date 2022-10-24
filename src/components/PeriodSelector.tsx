@@ -13,7 +13,7 @@ const PeriodSelector = () => {
                         <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600" }}>From</Text>
                         <View style={styles.box}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Text style={{ fontSize: 16, color: Colors.madidlyThemeBlue, fontWeight: isAndroid ? "900" : "600" }}>{''}</Text>
+                                <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600" }}>{''}</Text>
                                 <Icon name="chevron-down" size={22} color={"white"} />
                             </View>
                         </View>
@@ -22,7 +22,7 @@ const PeriodSelector = () => {
                         <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600" }}>To</Text>
                         <View style={styles.box}>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Text style={{ fontSize: 16, color: Colors.madidlyThemeBlue, fontWeight: isAndroid ? "900" : "600" }}>{''}</Text>
+                                <Text style={{ fontSize: 16, color: Colors.maidlyGrayText, fontWeight: isAndroid ? "900" : "600" }}>{''}</Text>
                                 <Icon name="chevron-down" size={22} color={"white"} />
                             </View>
                         </View>
